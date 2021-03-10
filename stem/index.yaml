@@ -1,0 +1,54 @@
+- doctype: { attributes: { html: true }}
+- html:
+    attributes: { lang: en }
+    content:
+    - head:
+      - meta: { attributes: { charset: utf-8 }}
+      - title: "Key Box"
+      - script:
+          # https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.js
+          inject: "cache/crypto-js.js"
+      - style: |
+          html { background: black; }
+          body {
+            width: 90%; margin: 0 auto;
+            font-family: sans-serif;
+            background: #555; color: #ccc;
+            }
+          div { padding: 1em 0.5em 0.5em 0.5em; }
+          span { padding-left: 1.5em ; }
+          #credentials  { width: 90%; margin:auto;}
+          #plus { color: #050; font-weight: bold;}
+          .icon { width: 5%; color: #500; font-size: 1.2em; font-weight:bold; }
+          .site { width: 30%; }
+          .user { width: 25%; }
+          .password { width: 30%; }
+          #note { cols: 100; margin:auto; background: #ccc;}
+      - script:
+         - inject: js/engine.js
+    - body:
+      - div:
+        - span:
+          - Master Password
+          - input: { attributes: { type: "password", id: "master"      }}
+          - input: { attributes: { type: "button", value: "Open", onclick="engine.open()" }}
+          - input: { attributes: { type: "button", value: "Save", onclick="engine.save(\"dump\")" }}
+          - input: { attributes: { type: "button", value: "Push", onclick="engine.save(\"github\")" }}
+        - span:
+          - label: { attributes: { for: "filter"}, content: "Filter"}
+          - input:
+              attributes:
+                id:   "filter"
+                type: "text"
+                name: filter
+                value:  ""
+                oninput: engine.refresh()
+        - span:
+          - input: { attributes: { id: "plus",type: "button", value: "+", onclick="engine.add()" }}
+      - hr:
+      - div:
+        - table.id=credentials:
+      - hr:
+      - div:
+        - pre:
+          - textarea.id=note: { attributes: {oninput: "engine.refresh()"}}
