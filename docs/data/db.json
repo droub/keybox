@@ -1,5 +1,5 @@
 {"door":"open","vault":
 {"credentials":
-[{"site":"http://blabla.com","user":"me","pass":"cheese2"},
-{"site":"http://blibli.com","user":"otherme","pass":"badcheese"}],
+[{"site":"http://blabla.com","user":"me","pass":"cheese"},
+{"site":"http://blibli.com","user":"otherme","pass":"badcheujknese"}],
 "note":"Hello World!\nCiao"}}
