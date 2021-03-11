@@ -1,5 +1,8 @@
 {"door":"open","vault":
-{"credentials":
+{"tokens": [
+  {"name":"keybox","value":"yopla"}
+],
+"credentials":
 [{"site":"http://blabla.com","user":"me","pass":"cheese33"},
 {"site":"http://blibli.com","user":"otherme","pass":"badcheese"}],
 "note":"Hello World!\nCiao"}}
