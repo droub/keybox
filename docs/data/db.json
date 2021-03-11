@@ -1,7 +1,1 @@
-{"door":"open","vault":
-{"tokens":
-[{"name":"keybox","value":"ef053b5fbe391bb9bbd195d15a87a42774aae6c4"}],
-"credentials":
-[{"site":"http://blabla.com","user":"me","pass":"cheese"},
-{"site":"http://blibli.com","user":"otherme","pass":"badcheese"}],
-"note":"Hello World!\nCiao"}}
+{"door":"close","vault":"VTJGc2RHVmtYMSs0VndmODIybHFZUWtHTjByekxrNWlQSm94QVpRdGswMjc0KzY0Vm9xYm41RGFiQXZBOWs0RjVoOUJ0QnlVUmZlQ2ppNm50cVRvVk1BUm50M04rdHpOZG96TXFMQURFK05VMmkxZ2tkSkhrTU1zOWw3OTVkSlRMa0xCTzhLU0VzdFBPbDBIbEpIZFM1UHorek9jVkFvNlF5UUJjZ0kwejVtT1dsaFVtbHFPclJQUXJFVWoyL1BUdGV4cVlpenA0RTVIeU4wSmpwWWh6ZnFKQ01KVTJVZWhKN0lDd0VGT2Nlb1N1VHp5U2RvN3VnM0d5TmJHRloxdXdwR0dSZzBrYUpleVpmb0wwMk4relRJUzdpbFBIWkJ0cXRPTWhzeTFOZkxucWxpbGNNRGd2Rytvajc0bEFwTUs="}
