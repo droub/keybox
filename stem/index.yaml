@@ -15,25 +15,35 @@
             font-family: sans-serif;
             background: #555; color: #ccc;
             }
-          div { padding: 1em 0.5em 0.5em 0.5em; }
+          input[type="button"] { border: 0; border-radius: 8px; }
+          div { padding: 0.5em 0.5em 0.5em 0.5em; }
           span { padding-left: 1.5em ; }
+          label { display: inline-block; width: 20vh ; }
           #credentials  { width: 90%; margin:auto;}
+          #tokens       { width: 90%; margin:auto;}
           #plus { color: #050; font-weight: bold;}
           .icon { width: 5%; color: #500; font-size: 1.2em; font-weight:bold; }
           .site { width: 30%; }
           .user { width: 25%; }
+          .name { width: 30%; }
+          .value { width: 55%; }
           .password { width: 30%; }
-          #note { cols: 100; margin:auto; background: #ccc;}
+          #note { width: 94%; background: #ccc;}
+          .right { float: right; padding-right: 1.5em; }
+          .center { display: inline-block; width: 40vh; text-align: center; }
       - script:
          - inject: js/engine.js
     - body:
       - div:
         - span:
-          - Master Password
-          - input: { attributes: { type: "password", id: "master"      }}
-          - input: { attributes: { type: "button", value: "Open", onclick="engine.open()" }}
-          - input: { attributes: { type: "button", value: "Save", onclick="engine.save(\"dump\")" }}
-          - input: { attributes: { type: "button", value: "Push", onclick="engine.save(\"github\")" }}
+          - label: { attributes: { for: "master"}, content: "Master password"}
+          - input: { attributes: { type: "password", id: "master"   }}
+          - input: { attributes: { type: "checkbox", id: "remember" }}
+          - label: { attributes: { for: "remember"}, content: "Remember"}
+        - span.right:
+          - input: { attributes: { type: "button", value: "Open", onclick: "engine.open()" }}
+      - hr:
+      - div:
         - span:
           - label: { attributes: { for: "filter"}, content: "Filter"}
           - input:
@@ -42,13 +52,20 @@
                 type: "text"
                 name: filter
                 value:  ""
-                oninput: engine.refresh()
-        - span:
-          - input: { attributes: { id: "plus",type: "button", value: "+", onclick="engine.add()" }}
+                oninput: engine.display()
+        - span.right:
+          - input: { attributes: { type: "button", value: "Push", onclick: "engine.save('github')" }}
+          - input: { attributes: { type: "button", value: "Dump", onclick: "engine.save('dump')"   }}
       - hr:
       - div:
+        - span.right:
+          - input: { attributes: { type: "button", value: "+", onclick: "engine.add('tokens')" }}
+        - table.id=tokens:
+      - hr:
+      - div:
+        - span.right:
+          - input: { attributes: { type: "button", value: "+", onclick: "engine.add('credentials')" }}
         - table.id=credentials:
       - hr:
-      - div:
-        - pre:
-          - textarea.id=note: { attributes: {oninput: "engine.refresh()"}}
+      - pre:
+        - textarea.id=note: { attributes: {oninput: "engine.refresh()"}}
