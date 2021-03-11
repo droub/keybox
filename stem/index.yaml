@@ -17,6 +17,7 @@
             }
           input[type="button"] { border: 0; border-radius: 8px; }
           div { padding: 0.5em 0.5em 0.5em 0.5em; }
+          div { min-height: 30px; }
           span { padding-left: 1.5em ; }
           label { display: inline-block; width: 20vh ; }
           #credentials  { width: 90%; margin:auto;}
@@ -28,7 +29,7 @@
           .name { width: 30%; }
           .value { width: 55%; }
           .password { width: 30%; }
-          #note { width: 94%; background: #ccc;}
+          #note { width: 94%; height: 200px; background: #ccc;}
           .right { float: right; padding-right: 1.5em; }
           .center { display: inline-block; width: 40vh; text-align: center; }
       - script:
@@ -59,11 +60,13 @@
       - hr:
       - div:
         - span.right:
+          - input: { attributes: { type: "button", value: "less", id: "foldtokens", onclick: "engine.fold(this)" }}
           - input: { attributes: { type: "button", value: "+", onclick: "engine.add('tokens')" }}
         - table.id=tokens:
       - hr:
       - div:
         - span.right:
+          - input: { attributes: { type: "button", value: "less", id: "foldpass", onclick: "engine.fold(this)" }}
           - input: { attributes: { type: "button", value: "+", onclick: "engine.add('credentials')" }}
         - table.id=credentials:
       - hr:

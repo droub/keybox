@@ -197,8 +197,13 @@ Engine = class Engine {
     return this.display();
   }
 
+  fold(button) {
+    button.value = button.value === "less" ? "more" : "less";
+    return this.display();
+  }
+
   display() {
-    var editable, entry, i, index, j, len, len1, pattern, ref, ref1, rows;
+    var editable, entry, i, index, j, len, len1, pattern, ref, ref1, rows, style;
     if (this.door === "open") {
       pattern = new RegExp(document.querySelector("#filter").value);
       editable = 'contenteditable oninput="engine.refresh()"';
@@ -206,20 +211,28 @@ Engine = class Engine {
       ref = this.vault.tokens;
       for (index = i = 0, len = ref.length; i < len; index = ++i) {
         entry = ref[index];
-        if (pattern.exec(Object.values(entry).join(""))) {
-          rows.push("<tr class=\"entry\">" + "<td class=\"icon\"><a onclick=\"engine.remove('tokens'," + index + ")\">x</a></td>" + "<td class=\"name\" " + editable + ">" + entry.name + "</td>" + "<td class=\"value\" " + editable + ">" + entry.value + "</td>" + "</tr>");
-        }
+        style = pattern.exec(Object.values(entry).join("")) ? "" : "display:none";
+        rows.push("<tr class=\"entry\" style=\"" + style + "\">" + "<td class=\"icon\"><a onclick=\"engine.remove('tokens'," + index + ")\">x</a></td>" + "<td class=\"name\" " + editable + ">" + entry.name + "</td>" + "<td class=\"value\" " + editable + ">" + entry.value + "</td>" + "</tr>");
+      }
+      if (document.querySelector("#foldtokens").value === "less") {
+        document.querySelector("#tokens").style = "display:initial";
+      } else {
+        document.querySelector("#tokens").style = "display:none";
       }
       document.querySelector("#tokens").innerHTML = rows.join('');
       rows = [];
       ref1 = this.vault.credentials;
       for (index = j = 0, len1 = ref1.length; j < len1; index = ++j) {
         entry = ref1[index];
-        if (pattern.exec(Object.values(entry).join(""))) {
-          rows.push("<tr class=\"entry\">" + "<td class=\"icon\"><a onclick=\"engine.remove('credentials'," + index + ")\">x</a></td>" + "<td class=\"site\" " + editable + ">" + entry.site + "</td>" + "<td class=\"user\" " + editable + ">" + entry.user + "</td>" + "<td class=\"pass\" " + editable + ">" + entry.pass + "</td>" + "</tr>");
-        }
+        style = pattern.exec(Object.values(entry).join("")) ? "" : "display:none";
+        rows.push("<tr class=\"entry\" style=\"" + style + "\">" + "<td class=\"icon\"><a onclick=\"engine.remove('credentials'," + index + ")\">x</a></td>" + "<td class=\"site\" " + editable + ">" + entry.site + "</td>" + "<td class=\"user\" " + editable + ">" + entry.user + "</td>" + "<td class=\"pass\" " + editable + ">" + entry.pass + "</td>" + "</tr>");
       }
       document.querySelector("#credentials").innerHTML = rows.join('');
+      if (document.querySelector("#foldpass").value === "less") {
+        document.querySelector("#credentials").style = "display:initial";
+      } else {
+        document.querySelector("#credentials").style = "display:none";
+      }
       return document.querySelector("#note").value = this.vault.note;
     }
   }

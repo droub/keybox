@@ -131,29 +131,41 @@ class Engine
         @vault[category].splice(index,1)
         @display()
 
+    fold: ( button ) ->
+        button.value = if button.value is "less" then "more" else "less"
+        @display()
+
     display: () ->
         if @door is "open"
           pattern = new RegExp( document.querySelector("#filter").value )
           editable = 'contenteditable oninput="engine.refresh()"'
           rows = []
           for entry,index in @vault.tokens
-              if pattern.exec Object.values(entry).join("")
-                  rows.push "<tr class=\"entry\">"+
-                      "<td class=\"icon\"><a onclick=\"engine.remove('tokens',"+index+")\">x</a></td>"+
-                      "<td class=\"name\" "+editable+">"+entry.name+"</td>"+
-                      "<td class=\"value\" "+editable+">"+entry.value+"</td>"+
-                      "</tr>"
+              style = if pattern.exec Object.values(entry).join("") then "" else "display:none"
+              rows.push "<tr class=\"entry\" style=\""+style+"\">"+
+                  "<td class=\"icon\"><a onclick=\"engine.remove('tokens',"+index+")\">x</a></td>"+
+                  "<td class=\"name\" "+editable+">"+entry.name+"</td>"+
+                  "<td class=\"value\" "+editable+">"+entry.value+"</td>"+
+                  "</tr>"
+          if document.querySelector("#foldtokens").value is "less"
+              document.querySelector("#tokens").style="display:initial"
+          else
+              document.querySelector("#tokens").style="display:none"
           document.querySelector("#tokens").innerHTML = rows.join('')
           rows = []
           for entry,index in @vault.credentials
-              if pattern.exec Object.values(entry).join("")
-                  rows.push "<tr class=\"entry\">"+
-                      "<td class=\"icon\"><a onclick=\"engine.remove('credentials',"+index+")\">x</a></td>"+
-                      "<td class=\"site\" "+editable+">"+entry.site+"</td>"+
-                      "<td class=\"user\" "+editable+">"+entry.user+"</td>"+
-                      "<td class=\"pass\" "+editable+">"+entry.pass+"</td>"+
-                      "</tr>"
+              style = if pattern.exec Object.values(entry).join("") then "" else "display:none"
+              rows.push "<tr class=\"entry\" style=\""+style+"\">"+
+                  "<td class=\"icon\"><a onclick=\"engine.remove('credentials',"+index+")\">x</a></td>"+
+                  "<td class=\"site\" "+editable+">"+entry.site+"</td>"+
+                  "<td class=\"user\" "+editable+">"+entry.user+"</td>"+
+                  "<td class=\"pass\" "+editable+">"+entry.pass+"</td>"+
+                  "</tr>"
           document.querySelector("#credentials").innerHTML = rows.join('')
+          if document.querySelector("#foldpass").value is "less"
+              document.querySelector("#credentials").style="display:initial"
+          else
+              document.querySelector("#credentials").style="display:none"
           document.querySelector("#note").value = @vault.note
 
 window.onload = () ->
