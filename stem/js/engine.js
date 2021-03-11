@@ -41,7 +41,7 @@ Engine = class Engine {
         pass: entry.querySelector(".pass").innerHTML
       });
     }
-    return this.vault.note = document.querySelector("#note").innerHTML;
+    return this.vault.note = document.querySelector("#note").value;
   }
 
   putData(content, token) {
@@ -220,7 +220,7 @@ Engine = class Engine {
         }
       }
       document.querySelector("#credentials").innerHTML = rows.join('');
-      return document.querySelector("#note").innerHTML = this.vault.note;
+      return document.querySelector("#note").value = this.vault.note;
     }
   }
 

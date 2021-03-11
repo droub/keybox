@@ -26,7 +26,7 @@ class Engine
                 user : entry.querySelector(".user").innerHTML
                 pass : entry.querySelector(".pass").innerHTML
                 }
-        @vault.note=document.querySelector("#note").innerHTML
+        @vault.note=document.querySelector("#note").value
 
     putData: ( content, token ) ->
         # github API
@@ -154,7 +154,7 @@ class Engine
                       "<td class=\"pass\" "+editable+">"+entry.pass+"</td>"+
                       "</tr>"
           document.querySelector("#credentials").innerHTML = rows.join('')
-          document.querySelector("#note").innerHTML = @vault.note
+          document.querySelector("#note").value = @vault.note
 
 window.onload = () ->
   # remember the key
